@@ -2,7 +2,6 @@ package com.algaworks.awpag.api.controller;
 
 import com.algaworks.awpag.domain.model.Cliente;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
@@ -12,10 +11,10 @@ import java.util.List;
 public class ClienteController {
 
     @GetMapping("/clientes")
-    public List<Cliente> getClientes() {
+    public List<Cliente> listar() {
         var cliente1 = new Cliente();
         cliente1.setId(1L);
-        cliente1.setNome("Princesa Isabel");
+        cliente1.setNome("Princesa Isabel de Bragança");
         cliente1.setTelefone("47 99999-1111");
         cliente1.setEmail("princesa_isable@algaworks.com");
 
