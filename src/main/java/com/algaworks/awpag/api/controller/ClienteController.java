@@ -7,10 +7,12 @@ import jakarta.persistence.PersistenceContext;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @RestController
@@ -25,9 +27,16 @@ public class ClienteController {
     @GetMapping("/clientes")
     public List<Cliente> listar() {
         //return manager.createQuery("from Cliente", Cliente.class).getResultList();
-        return  clienteRepository.findAll();
         //return clienteRepository.findByNome("Princesa Isabel");
         //return clienteRepository.findByNomeContaining("Is");
+        return  clienteRepository.findAll();
+    }
+
+    @GetMapping("/clientes/{clienteId}")
+    public Cliente buscar(@PathVariable Long clienteId){
+        Optional<Cliente> cliente = clienteRepository.findById(clienteId);
+
+        return cliente.orElse(null);
     }
 
 
