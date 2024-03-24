@@ -1,7 +1,9 @@
 package com.algaworks.awpag.api.controller;
 
+import com.algaworks.awpag.domain.exception.NegocioException;
 import com.algaworks.awpag.domain.model.Cliente;
 import com.algaworks.awpag.domain.repository.ClienteRepository;
+import com.algaworks.awpag.domain.service.CadastroClienteService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.validation.Valid;
@@ -23,6 +25,7 @@ public class ClienteController {
     //@PersistenceContext
     //private EntityManager manager;
 
+    private final CadastroClienteService cadastroClienteService;
     //@Autowired
     private final ClienteRepository clienteRepository;
 
@@ -51,7 +54,8 @@ public class ClienteController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public Cliente adicionar(@Valid @RequestBody Cliente cliente){
-        return clienteRepository.save(cliente);
+        //return clienteRepository.save(cliente);
+        return cadastroClienteService.salvar(cliente);
     }
 
     @PutMapping("/{clienteId}")
@@ -63,7 +67,8 @@ public class ClienteController {
 
         // se existir: atualiza e nao permite incluir novos registros
         cliente.setId(clienteId);
-        cliente = clienteRepository.save(cliente);
+        //cliente = clienteRepository.save(cliente);
+        cliente = cadastroClienteService.salvar(cliente);
 
         // codigo 200 ok
         return ResponseEntity.ok(cliente);
@@ -77,10 +82,16 @@ public class ClienteController {
         }
 
         // se existir, exclui
-        clienteRepository.deleteById(clienteId);
+        //clienteRepository.deleteById(clienteId);
+        cadastroClienteService.excluir(clienteId);
 
         // 204 no content
         return ResponseEntity.noContent().build();
+    }
+
+    @ExceptionHandler(NegocioException.class)
+    public ResponseEntity<String> capturarErro(NegocioException e) {
+        return ResponseEntity.badRequest().body(e.getMessage());
     }
 
 
