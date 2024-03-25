@@ -4,6 +4,7 @@ import com.algaworks.awpag.domain.exception.NegocioException;
 import com.algaworks.awpag.domain.model.Parcelamento;
 import com.algaworks.awpag.domain.repository.ParcelamentoRepository;
 import com.algaworks.awpag.domain.service.ParcelamentoService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +38,7 @@ public class ParcelamentoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Parcelamento cadastrar(@RequestBody Parcelamento parcelamento) {
+    public Parcelamento cadastrar(@Valid @RequestBody Parcelamento parcelamento) {
         return parcelamentoService.cadastrar(parcelamento);
     }
 
