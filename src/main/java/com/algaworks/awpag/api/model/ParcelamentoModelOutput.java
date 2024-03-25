@@ -8,10 +8,11 @@ import java.time.OffsetDateTime;
 
 @Getter
 @Setter
-public class ParcelamentoRepresentationModel {
+public class ParcelamentoModelOutput {
 
     private Long id;
-    private String nomeCliente;
+    //private String nomeCliente;
+    private ClienteResumoModelOutput cliente;
     private String descricao;
     private BigDecimal valorTotal;
     private Integer parcelas;
