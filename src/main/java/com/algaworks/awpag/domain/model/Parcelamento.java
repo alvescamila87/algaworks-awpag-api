@@ -1,7 +1,11 @@
 package com.algaworks.awpag.domain.model;
 
+import com.algaworks.awpag.domain.validation.ValidationGroups;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
+import jakarta.validation.groups.ConvertGroup;
+import jakarta.validation.groups.Default;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +24,8 @@ public class Parcelamento {
     @EqualsAndHashCode.Include
     private Long id;
 
+    @Valid //validacao em cascata
+    @ConvertGroup(from = Default.class, to = ValidationGroups.clienteId.class) //adiciona validacao invertida
     @NotNull
     @ManyToOne
     //@JoinColumn(name = "cliente_id")
