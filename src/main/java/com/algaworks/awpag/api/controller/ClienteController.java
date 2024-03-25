@@ -89,10 +89,15 @@ public class ClienteController {
         return ResponseEntity.noContent().build();
     }
 
+    /*
+    // movido para o ApiExceptionHandler
+
     @ExceptionHandler(NegocioException.class)
+
     public ResponseEntity<String> capturarErro(NegocioException e) {
         return ResponseEntity.badRequest().body(e.getMessage());
     }
+    */
 
 
 }

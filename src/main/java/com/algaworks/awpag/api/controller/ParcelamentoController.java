@@ -42,8 +42,14 @@ public class ParcelamentoController {
         return parcelamentoService.cadastrar(parcelamento);
     }
 
+    /*
+
+    //movido para o ApiExceptionHandler
+
     @ExceptionHandler(NegocioException.class)
     public ResponseEntity<String> capturarErro(NegocioException e) {
         return ResponseEntity.badRequest().body(e.getMessage());
     }
+
+     */
 }
